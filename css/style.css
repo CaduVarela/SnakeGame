@@ -27,7 +27,7 @@ header#cabecalho {
     align-items: middle;
 }
 
-#game-screen {
+#tela-jogo {
     width: 300px;
     height: 300px;
     border: 2px ridge rgb(0, 0, 0);
