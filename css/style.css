@@ -53,6 +53,10 @@ header#cabecalho {
     background-color: rgb(0, 0, 0);
 }
 
+.objetivo {
+    background-color: rgb(255, 100, 70);
+}
+
 /* Grade */
 
 #grade {
