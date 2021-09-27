@@ -14,7 +14,7 @@ function iniciarJogador() {
 }
 
 function crescerJogador() {
-
+    
 }
 
 function atualizarHistoricoMovimento() {
