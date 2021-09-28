@@ -7,19 +7,24 @@
         <script type="text/javascript" src="./js/tela.js"></script>
         <script src="./js/jogador.js"></script>
         <script type="text/javascript" src="./js/jogo.js"></script>
+        <script>
+            function iniciarJogo() {
+                document.addEventListener('keydown', function(event) {
+                    controlarJogador(event.key)
+                });
+                iniciarGrade();
+                posicionarJogador();
+            }
+        </script>
     </head>
     <body>
         <header id="cabecalho">
-            <h1>Ble</h1>
+            <h1>.</h1>
         </header>
         <div id="corpo">
-            <h1></h1> <!--?????-->
-            <div id="tela-jogo">
-                <script>
-                    iniciarGrade();
-                    iniciarJogador();
-                    adicionarObjetivo();
-                </script>
+            <h1><button onclick="adicionarObjetivo()">Adicionar Objetivo</button></h1> <!--?????-->
+            <div id="tela-jogo" onkeydown="moverJogador()">
+                <script>iniciarJogo()</script>
             </div>
         </div>
     </body>

@@ -11,15 +11,15 @@ body {
 }
 
 header#cabecalho {
-    background-color: rgb(71, 71, 71);
+    background-color: rgba(150, 255, 80, 0.1);
     box-shadow: 0 1px 20px rgba(0, 0, 0,.4);
-    color: #fff;
+    color: rgb(70, 70, 70);
     text-align: center;
 
     width: 100%;
-    height: calc(10% - 10px);
+    height: 60px;
 
-    padding: 10px 0 0;
+    padding: 10px 0;
 }
 
 #corpo {
@@ -39,6 +39,8 @@ header#cabecalho {
 
 #tela-jogo {
     --tamanhoTelaJogo: 500px;
+    min-width: calc(var(--tamanhoTelaJogo)+10px);
+    min-height: calc(var(--tamanhoTelaJogo)+10px);;
     width: var(--tamanhoTelaJogo);
     height: var(--tamanhoTelaJogo);
     border: 2px ridge rgb(0, 0, 0);
