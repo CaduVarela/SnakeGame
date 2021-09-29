@@ -1,11 +1,12 @@
 var tela = document.getElementById('tela-jogo');
-
+var tamanhoJogador = 1;
 var posicaoJogador = {}
+
+// Posição inicial
 posicaoJogador.x = 15;
 posicaoJogador.y = 15;
 
 var historicoMovimentos = [];
-var historicoCoordenas = [];
 
 function controlarJogador(tecla) {
     console.log(tecla)
@@ -43,9 +44,8 @@ function crescerJogador() {
     
 }
 
-function atualizarHistorico(movimento) {
-    historicoMovimentos.push(movimento);
-    historicoCoordenas.push(`(${posicaoJogador.x}, ${posicaoJogador.y})`);
+function atualizarHistorico(ultimoMovimento) {
+    historicoMovimentos.push(ultimoMovimento);
     console.log(historicoMovimentos)
-    console.log(historicoCoordenas)
+    
 }
