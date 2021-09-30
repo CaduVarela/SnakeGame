@@ -47,8 +47,8 @@ header#cabecalho {
     /*margin: 10% auto 0;*/
 }
 
-.snake {
-    background-color: rgba(0, 0, 0, .6);
+.snake-body {
+    background-color: rgba(0, 0, 0, .7);
 }
 
 .snake-head {
