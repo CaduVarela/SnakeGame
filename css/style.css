@@ -48,7 +48,7 @@ header#cabecalho {
 }
 
 .snake-body {
-    background-color: rgba(0, 0, 0, .7);
+    background-color: green;
 }
 
 .snake-head {
@@ -69,7 +69,7 @@ header#cabecalho {
     border-spacing: 0;
 }
 
-#grade td {
+#grade tr td {
     width: calc(var(--tamanhoTelaJogo)/100);
     border: 1px solid rgba(55, 55, 55, 0.05);
 }

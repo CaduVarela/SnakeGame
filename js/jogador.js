@@ -1,5 +1,5 @@
 var tela = document.getElementById('tela-jogo');
-let tamanhoGrade;
+var tamanhoGrade;
 var tamanhoJogador = 1;
 var pontosJogador = 0;
 var posicaoJogador = {}
@@ -8,6 +8,7 @@ var posicaoJogador = {}
 posicaoJogador.x = 15;
 posicaoJogador.y = 15;
 
+var intervaloMovimento = 1000; // em milissegundos // (80)
 var idIntervaloMovimento;
 var historicoMovimentos = [];
 var gradeAtual; // Elemento DOM em que 'snake-head' se encontra
@@ -20,7 +21,7 @@ function controlarJogador(tecla) {
 
     // Inicia movimento automatico de COBRA
     if (historicoMovimentos.length == 0) {
-        idIntervaloMovimento = setInterval(manterMovimentoJogador, 80);
+        idIntervaloMovimento = setInterval(manterMovimentoJogador, intervaloMovimento);
     }
 
     getGradeAtual().classList.remove('snake-head');
@@ -85,13 +86,93 @@ function manterMovimentoJogador() {
     
     if (verificarDerrota()) {
         console.log('perdeu');
+        //tela.style = 'border: 2px ridge red;';
         return;
     }
     posicionarJogador();
+    if (tamanhoJogador > 1) {
+        posicionarCorpoJogador();
+    }
 }
 
 function posicionarJogador() {
     getGradeAtual().classList.add('snake-head');
+}
+
+function posicionarCorpoJogador() {
+    var x1 = posicaoJogador.x;
+    var y1 = posicaoJogador.y;
+    var corpo = [{x, y}];
+
+    encontrarCorpoJogador();
+    corpo = corpo.reverse();
+
+    for (i=tamanhoJogador; i<0; i--) {
+        switch (historicoMovimentos[i]) {
+            case 'cima':
+                getGrade(corpo[i].x, corpo[i].y--).classList.add('snake-body');
+                break;
+            case 'esquerda':
+                getGrade(corpo[i].x--, corpo[i].y).classList.add('snake-body');
+                break;
+            case 'baixo':
+                getGrade(corpo[i].x, corpo[i].y++).classList.add('snake-body');
+                break;
+            case 'direita':
+                getGrade(corpo[i].x++, corpo[i].y).classList.add('snake-body');
+                break;
+        }
+    }
+
+    function encontrarCorpoJogador() {
+        for(i=0, j=tamanhoJogador-1; i<tamanhoJogador-1; i++, j--) {
+            console.log('orientacao: '+encontrarOrientacao(j));
+            switch(encontrarOrientacao(j)) {
+                case 'cima':
+                    y1--;
+                    break 
+                case 'esquerda':
+                    x1--;
+                    break 
+                case 'baixo':
+                    y1++;
+                    break 
+                case 'direita':
+                    x1++;
+                    break 
+            }
+            corpo[i].x = x1;
+            corpo[i].y = y1;
+        }
+        console.log('Corpo: '+corpo);
+    }
+
+    function encontrarOrientacao(indiceMovimento) {
+        if (indiceMovimento == 1) {
+            switch (historicoMovimentos[0]) {
+                case 'cima': 
+                    return 'baixo';
+                case 'esquerda': 
+                    return 'direita';
+                case 'baixo': 
+                    return 'cima';
+                case 'direita':
+                    return 'esquerda';
+            }
+        } else {
+            switch (historicoMovimentos[indiceMovimento]) {
+                case 'cima': 
+                    return 'baixo';
+                case 'esquerda': 
+                    return 'direita';
+                case 'baixo': 
+                    return 'cima';
+                case 'direita':
+                    return 'esquerda';
+            }
+        }
+        
+    }
 }
 
 function verificarDerrota() {
@@ -105,7 +186,6 @@ function verificarDerrota() {
 
 function crescerJogador() {
     tamanhoJogador++;
-    console.log(historicoMovimentos[historicoMovimentos.length-1]);
     switch (historicoMovimentos[historicoMovimentos.length-1]) {
         case 'cima':
             getGrade(posicaoJogador.x, posicaoJogador.y+1).classList.add('snake-body');
