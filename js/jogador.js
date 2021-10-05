@@ -2,7 +2,7 @@ var tela = document.getElementById('tela-jogo');
 var tamanhoGrade;
 var tamanhoJogador = 1;
 var pontosJogador = 0;
-var posicaoJogador = {}
+var posicaoJogador = {};
 
 // Posição inicial
 posicaoJogador.x = 15;
@@ -196,8 +196,10 @@ function crescerJogador() {
 function atualizarHistorico(ultimoMovimento) {
     if (ultimoMovimento != historicoMovimentos[historicoMovimentos.length-1] || historicoMovimentos.length == 0) {
         historicoMovimentos.push(ultimoMovimento);
-        historicoMovimentos = historicoMovimentos.slice(historicoMovimentos.length-tamanhoJogador, historicoMovimentos.length)
+        //historicoMovimentos = historicoMovimentos.slice(0, historicoMovimentos.length)
         console.log(historicoMovimentos)
+    } else {
+
     }
 }
 
