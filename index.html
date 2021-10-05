@@ -13,6 +13,7 @@
                     controlarJogador(event.key)
                 });
                 iniciarGrade();
+                adicionarObjetivo();
                 posicionarJogador();
             }
         </script>
@@ -23,7 +24,7 @@
         </header>
         <div id="corpo">
             <h1><button onclick="adicionarObjetivo()">Adicionar Objetivo</button></h1> <!--?????-->
-            <div id="tela-jogo" onkeydown="moverJogador()">
+            <div id="tela-jogo">
                 <script>iniciarJogo()</script>
             </div>
         </div>
