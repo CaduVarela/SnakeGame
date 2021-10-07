@@ -8,7 +8,7 @@ var posicaoJogador = {};
 posicaoJogador.x = 15;
 posicaoJogador.y = 15;
 
-var intervaloMovimento = 400; // em milissegundos // (80)
+var intervaloMovimento = 200; // em milissegundos // (80)
 var idIntervaloMovimento;
 var historicoMovimentos = [];
 var gradeAtual; // Elemento DOM em que 'snake-head' se encontra
@@ -25,6 +25,7 @@ function controlarJogador(tecla) {
     }
 
     getGradeAtual().classList.remove('snake-head');
+
     switch (tecla) {
         case 'w':
         case 'ArrowUp':
@@ -55,7 +56,6 @@ function controlarJogador(tecla) {
             //posicaoJogador.x++;
             break;
     }
-
     posicionarJogador();
 }
 
@@ -93,6 +93,7 @@ function manterMovimentoJogador() {
     if (tamanhoJogador > 1) {
         posicionarCorpoJogador();
     }
+    atualizarHistorico(historicoMovimentos[historicoMovimentos.length-1]);
     if (verificarPontuacao()) {
         adicionarObjetivo();
         console.log('Pontos: '+pontosJogador);
@@ -198,8 +199,9 @@ function atualizarHistorico(ultimoMovimento) {
         historicoMovimentos.push(ultimoMovimento);
         //historicoMovimentos = historicoMovimentos.slice(0, historicoMovimentos.length)
         console.log(historicoMovimentos)
-    } else {
-
+    } else if (ultimoMovimento == historicoMovimentos[historicoMovimentos.length-1]) {
+        historicoMovimentos.shift();
+        historicoMovimentos.push(ultimoMovimento);
     }
 }
 
