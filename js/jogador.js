@@ -8,7 +8,8 @@ var posicaoJogador = {};
 posicaoJogador.x = 15;
 posicaoJogador.y = 15;
 
-var intervaloMovimento = 200; // em milissegundos // (80)
+var movimento;
+var intervaloMovimento = 80; // em milissegundos // (80)
 var idIntervaloMovimento;
 var historicoMovimentos = [];
 var gradeAtual; // Elemento DOM em que 'snake-head' se encontra
@@ -26,34 +27,55 @@ function controlarJogador(tecla) {
 
     getGradeAtual().classList.remove('snake-head');
 
+    if (tamanhoJogador == 1) {
+        switch (tecla) {
+            case 'w':
+            case 'ArrowUp':
+                if (historicoMovimentos[historicoMovimentos.length-1] != 'baixo') {
+                    atualizarHistorico('cima');
+                }
+                //posicaoJogador.y--;
+                break;
+            case 'a':
+            case 'ArrowLeft':
+                if (historicoMovimentos[historicoMovimentos.length-1] != 'direita') {
+                    atualizarHistorico('esquerda');
+                }
+                //posicaoJogador.x--;
+                break;
+            case 's':
+            case 'ArrowDown':
+                if (historicoMovimentos[historicoMovimentos.length-1] != 'cima') {
+                    atualizarHistorico('baixo');
+                }
+                //posicaoJogador.y++;
+                break;
+            case 'd':
+            case 'ArrowRight':
+                if (historicoMovimentos[historicoMovimentos.length-1] != 'esquerda') {
+                    atualizarHistorico('direita');
+                }
+                //posicaoJogador.x++;
+                break;
+        }
+    }
+
     switch (tecla) {
         case 'w':
         case 'ArrowUp':
-            if (historicoMovimentos[historicoMovimentos.length-1] != 'baixo') {
-                atualizarHistorico('cima');
-            }
-            //posicaoJogador.y--;
+            movimento = 'cima';
             break;
         case 'a':
         case 'ArrowLeft':
-            if (historicoMovimentos[historicoMovimentos.length-1] != 'direita') {
-                atualizarHistorico('esquerda');
-            }
-            //posicaoJogador.x--;
+            movimento = 'esquerda';
             break;
         case 's':
         case 'ArrowDown':
-            if (historicoMovimentos[historicoMovimentos.length-1] != 'cima') {
-                atualizarHistorico('baixo');
-            }
-            //posicaoJogador.y++;
+            movimento = 'baixo';
             break;
         case 'd':
         case 'ArrowRight':
-            if (historicoMovimentos[historicoMovimentos.length-1] != 'esquerda') {
-                atualizarHistorico('direita');
-            }
-            //posicaoJogador.x++;
+            movimento = 'direita';
             break;
     }
     posicionarJogador();
@@ -93,7 +115,7 @@ function manterMovimentoJogador() {
     if (tamanhoJogador > 1) {
         posicionarCorpoJogador();
     }
-    atualizarHistorico(historicoMovimentos[historicoMovimentos.length-1]);
+    atualizarHistorico(movimento);
     if (verificarPontuacao()) {
         adicionarObjetivo();
         console.log('Pontos: '+pontosJogador);
@@ -163,7 +185,6 @@ function posicionarCorpoJogador() {
             snakeBody[i].classList.remove('snake-body');
         }
     }
-    
 }
 
 function verificarDerrota() {
