@@ -10,14 +10,19 @@ function adicionarObjetivo() {
         idElemento=`gradeX${posicaoObjetivo.x}Y${posicaoObjetivo.y}`;
         elemento = document.getElementById(idElemento);
         console.log(`Objetivo adicionado em (${posicaoObjetivo.x}, ${posicaoObjetivo.y})`);
-    } while (verificarPosicaoElemento(idElemento));
+    } while (verificarOcupacaoElemento(idElemento));
+
     elemento.classList.add('objetivo');
 }
 
-function verificarPosicaoElemento(idElemento) {
+function verificarOcupacaoElemento(idElemento) {
     let elemento = document.getElementById(idElemento);
     if (elemento.classList.contains('objetivo') || elemento.classList.contains('snake') || elemento.classList.contains('snake-head')) {
         return true;
     }
     return false;
+}
+
+function atualizarPontuacao() {
+    document.getElementById('pontos').innerHTML = 'Pontos: '+getPontos();;
 }

@@ -1,4 +1,4 @@
-var tela = document.getElementById('tela-jogo');
+var tela;
 var tamanhoGrade;
 var tamanhoJogador = 1;
 var pontosJogador = 0;
@@ -8,11 +8,11 @@ var posicaoJogador = {};
 posicaoJogador.x = 15;
 posicaoJogador.y = 15;
 
+var bordasTemColisao = false;
 var movimento;
-var intervaloMovimento = 80; // em milissegundos // (80)
+var intervaloMovimento = 120; // em milissegundos // (80)
 var idIntervaloMovimento;
 var historicoMovimentos = [];
-var gradeAtual; // Elemento DOM em que 'snake-head' se encontra
 
 function controlarJogador(tecla) {
     tamanhoGrade = document.querySelectorAll('#tela-jogo tbody tr').length;
@@ -26,7 +26,6 @@ function controlarJogador(tecla) {
     }
 
     getGradeAtual().classList.remove('snake-head');
-
     if (tamanhoJogador == 1) {
         switch (tecla) {
             case 'w':
@@ -59,18 +58,30 @@ function controlarJogador(tecla) {
     switch (tecla) {
         case 'w':
         case 'ArrowUp':
+            if (movimento == 'baixo') {
+                break;
+            }
             movimento = 'cima';
             break;
         case 'a':
         case 'ArrowLeft':
+            if (movimento == 'direita') {
+            break;
+        }
             movimento = 'esquerda';
             break;
         case 's':
         case 'ArrowDown':
+            if (movimento == 'cima') {
+            break;
+        }
             movimento = 'baixo';
             break;
         case 'd':
         case 'ArrowRight':
+            if (movimento == 'esquerda') {
+            break;
+        }
             movimento = 'direita';
             break;
     }
@@ -104,16 +115,42 @@ function manterMovimentoJogador() {
     
     if (verificarDerrota()) {
         console.log('perdeu');
-        //tela.style = 'border: 2px ridge red;';
+        switch (historicoMovimentos[historicoMovimentos.length-1]) {
+            case 'cima':
+                posicaoJogador.y++;
+                getGradeAtual().style = 'border-top: 1px solid rgb(255, 100, 70);';
+                break
+            case 'esquerda':
+                posicaoJogador.x++;
+                getGradeAtual().style = 'border-left: 1px solid rgb(255, 100, 70);';
+                break
+            case 'baixo':
+                posicaoJogador.y--;
+                getGradeAtual().style = 'border-bottom: 1px solid rgb(255, 100, 70);';
+                break
+            case 'direita':
+                posicaoJogador.x--;
+                getGradeAtual().style = 'border-right: 1px solid rgb(255, 100, 70);';
+                break
+        }
+        posicionarJogador();
+        tela = document.getElementById('tela-jogo');
+        tela.style='border: 2px ridge rgb(255, 100, 70);';
         return;
     }
     posicionarJogador();
+
     if (tamanhoJogador > 1) {
         posicionarCorpoJogador();
     }
+
     atualizarHistorico(movimento);
+
     if (verificarPontuacao()) {
         adicionarObjetivo();
+        //if (pontosJogador >= 8) {
+        //    adicionarObjetivo();
+        //}
         console.log('Pontos: '+pontosJogador);
     }
 }
@@ -153,7 +190,7 @@ function posicionarCorpoJogador() {
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
         }
-        console.log('Corpo X: '+corpoX+'\nCorpo Y: '+corpoY);
+        //console.log('Corpo X: '+corpoX+'\nCorpo Y: '+corpoY);
     }
 
     function removerSnakeBody() {
@@ -165,10 +202,22 @@ function posicionarCorpoJogador() {
 }
 
 function verificarDerrota() {
-    if (posicaoJogador.x <= -1 || posicaoJogador.x >= tamanhoGrade || posicaoJogador.y <= -1 || posicaoJogador.y >= tamanhoGrade) {
-        clearInterval(idIntervaloMovimento);
-        return true;
-    }
+    if (bordasTemColisao) {
+        if (posicaoJogador.x <= -1 || posicaoJogador.x >= tamanhoGrade || posicaoJogador.y <= -1 || posicaoJogador.y >= tamanhoGrade) {
+                    clearInterval(idIntervaloMovimento);
+                    return true;
+                }
+    } else {
+        if (posicaoJogador.x <= -1) {
+            posicaoJogador.x = tamanhoGrade-1;
+        } else if (posicaoJogador.x >= tamanhoGrade) {
+            posicaoJogador.x = 0;
+        } else if (posicaoJogador.y <= -1) {
+            posicaoJogador.y = tamanhoGrade-1;
+        } else if (posicaoJogador.y >= tamanhoGrade) {
+            posicaoJogador.y = 0;
+        }
+    }  
     
     if (getGradeAtual().classList.contains('snake-body')) {
         clearInterval(idIntervaloMovimento);
@@ -182,6 +231,7 @@ function verificarPontuacao() {
     if (getGradeAtual().classList.contains('snake-head') && getGradeAtual().classList.contains('objetivo')) {
         crescerJogador();
         pontosJogador++;
+        atualizarPontuacao();
         getGradeAtual().classList.remove('objetivo');
         return true;
     }
@@ -204,9 +254,13 @@ function atualizarHistorico(ultimoMovimento) {
 }
 
 function getGradeAtual() {
-    return gradeAtual = document.getElementById(`gradeX${posicaoJogador.x}Y${posicaoJogador.y}`);
+    return document.getElementById(`gradeX${posicaoJogador.x}Y${posicaoJogador.y}`);
 }
 
 function getGrade(x, y) {
     return grade = document.getElementById(`gradeX${x}Y${y}`);
+}
+
+function getPontos() {
+    return pontosJogador;
 }
