@@ -9,8 +9,9 @@ posicaoJogador.x = 15;
 posicaoJogador.y = 15;
 
 var bordasTemColisao = false;
+var comandoDado = false;
 var movimento;
-var intervaloMovimento = 120; // em milissegundos // (80)
+var intervaloMovimento = 100; // em milissegundos // padrão: 100
 var idIntervaloMovimento;
 var historicoMovimentos = [];
 
@@ -26,64 +27,67 @@ function controlarJogador(tecla) {
     }
 
     getGradeAtual().classList.remove('snake-head');
-    if (tamanhoJogador == 1) {
+    if (!comandoDado) {
+        if (tamanhoJogador == 1) {
+            switch (tecla[0]) {
+                case 'w':
+                case 'ArrowUp':
+                    if (historicoMovimentos[historicoMovimentos.length-1] != 'baixo') {
+                        atualizarHistorico('cima');
+                    }
+                    break;
+                case 'a':
+                case 'ArrowLeft':
+                    if (historicoMovimentos[historicoMovimentos.length-1] != 'direita') {
+                        atualizarHistorico('esquerda');
+                    }
+                    break;
+                case 's':
+                case 'ArrowDown':
+                    if (historicoMovimentos[historicoMovimentos.length-1] != 'cima') {
+                        atualizarHistorico('baixo');
+                    }
+                    break;
+                case 'd':
+                case 'ArrowRight':
+                    if (historicoMovimentos[historicoMovimentos.length-1] != 'esquerda') {
+                        atualizarHistorico('direita');
+                    }
+                    break;
+            }
+        }
+
         switch (tecla) {
             case 'w':
             case 'ArrowUp':
-                if (historicoMovimentos[historicoMovimentos.length-1] != 'baixo') {
-                    atualizarHistorico('cima');
+                if (movimento == 'baixo') {
+                    break;
                 }
+                movimento = 'cima';
                 break;
             case 'a':
             case 'ArrowLeft':
-                if (historicoMovimentos[historicoMovimentos.length-1] != 'direita') {
-                    atualizarHistorico('esquerda');
-                }
+                if (movimento == 'direita') {
+                break;
+            }
+                movimento = 'esquerda';
                 break;
             case 's':
             case 'ArrowDown':
-                if (historicoMovimentos[historicoMovimentos.length-1] != 'cima') {
-                    atualizarHistorico('baixo');
-                }
+                if (movimento == 'cima') {
+                break;
+            }
+                movimento = 'baixo';
                 break;
             case 'd':
             case 'ArrowRight':
-                if (historicoMovimentos[historicoMovimentos.length-1] != 'esquerda') {
-                    atualizarHistorico('direita');
-                }
-                break;
-        }
-    }
-
-    switch (tecla) {
-        case 'w':
-        case 'ArrowUp':
-            if (movimento == 'baixo') {
+                if (movimento == 'esquerda') {
                 break;
             }
-            movimento = 'cima';
-            break;
-        case 'a':
-        case 'ArrowLeft':
-            if (movimento == 'direita') {
-            break;
+                movimento = 'direita';
+                break;
         }
-            movimento = 'esquerda';
-            break;
-        case 's':
-        case 'ArrowDown':
-            if (movimento == 'cima') {
-            break;
-        }
-            movimento = 'baixo';
-            break;
-        case 'd':
-        case 'ArrowRight':
-            if (movimento == 'esquerda') {
-            break;
-        }
-            movimento = 'direita';
-            break;
+        comandoDado = true;
     }
     posicionarJogador();
 }
@@ -153,6 +157,7 @@ function manterMovimentoJogador() {
         //}
         console.log('Pontos: '+pontosJogador);
     }
+    comandoDado = false;
 }
 
 function posicionarJogador() {
@@ -246,11 +251,14 @@ function atualizarHistorico(ultimoMovimento) {
     if (ultimoMovimento != historicoMovimentos[historicoMovimentos.length-1] || historicoMovimentos.length == 0) {
         historicoMovimentos.push(ultimoMovimento);
         //historicoMovimentos = historicoMovimentos.slice(0, historicoMovimentos.length)
-        console.log(historicoMovimentos)
     } else if (ultimoMovimento == historicoMovimentos[historicoMovimentos.length-1]) {
         historicoMovimentos.shift();
         historicoMovimentos.push(ultimoMovimento);
     }
+    historicoMovimentos.reverse();
+    historicoMovimentos.slice(tamanhoJogador, historicoMovimentos.length-tamanhoJogador)
+    historicoMovimentos.reverse();
+    console.log(historicoMovimentos);
 }
 
 function getGradeAtual() {
