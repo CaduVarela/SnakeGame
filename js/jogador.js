@@ -8,7 +8,7 @@ var posicaoJogador = {};
 posicaoJogador.x = 15;
 posicaoJogador.y = 15;
 
-var bordasTemColisao = false;
+var bordasTemColisao = true;
 var comandoDado = false;
 var movimento;
 var intervaloMovimento = 100; // em milissegundos // padrão: 100
