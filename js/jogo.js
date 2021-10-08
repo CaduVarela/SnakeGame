@@ -24,5 +24,5 @@ function verificarOcupacaoElemento(idElemento) {
 }
 
 function atualizarPontuacao() {
-    document.getElementById('pontos').innerHTML = 'Pontos: '+getPontos();;
+    document.getElementById('pontos').innerHTML = '<span class="negrito">Pontos</span>: '+getPontos();;
 }
