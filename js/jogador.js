@@ -17,7 +17,17 @@ var historicoMovimentos = [];
 
 function controlarJogador(tecla) {
     tamanhoGrade = document.querySelectorAll('#tela-jogo tbody tr').length;
-
+    let teclasPermitidas = ['w', 'a','s' ,'d' , 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
+    console.log('Tecla: '+tecla);
+    let permitir = false;
+    for (i=0; i<teclasPermitidas.length; i++) {
+        if (tecla == teclasPermitidas[i]) {
+            permitir = true;
+        }
+    }
+    if (permitir == false) {
+        return;
+    }
     //console.log(tamanhoGrade)
     //console.log(tecla)
 
@@ -29,7 +39,7 @@ function controlarJogador(tecla) {
     getGradeAtual().classList.remove('snake-head');
     if (!comandoDado) {
         if (tamanhoJogador == 1) {
-            switch (tecla[0]) {
+            switch (tecla) {
                 case 'w':
                 case 'ArrowUp':
                     if (historicoMovimentos[historicoMovimentos.length-1] != 'baixo') {
@@ -250,7 +260,6 @@ function crescerJogador() {
 function atualizarHistorico(ultimoMovimento) {
     if (ultimoMovimento != historicoMovimentos[historicoMovimentos.length-1] || historicoMovimentos.length == 0) {
         historicoMovimentos.push(ultimoMovimento);
-        //historicoMovimentos = historicoMovimentos.slice(0, historicoMovimentos.length)
     } else if (ultimoMovimento == historicoMovimentos[historicoMovimentos.length-1]) {
         historicoMovimentos.shift();
         historicoMovimentos.push(ultimoMovimento);
