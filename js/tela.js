@@ -15,3 +15,9 @@ function iniciarGrade() {
 
     tela.insertAdjacentHTML("afterbegin", HTMLgrade);
 }
+
+function testarMobile() {
+    if (screen.width <= 720) {
+        document.location = '../bleble.html';
+    }
+}

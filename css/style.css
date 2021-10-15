@@ -15,12 +15,11 @@ body {
     margin: 0;
 }
 
-
-
 header#cabecalho {
     background-image: url('../img/padrao_ondulado.jpg');
     background-repeat: repeat;
     background-position-x: 0;
+    filter: hue-rotate(250deg);
     background-color: rgb(197, 219, 246);
     box-shadow: 0 1px 20px rgba(0, 0, 0,.4);
     text-align: center;
