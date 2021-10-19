@@ -1,12 +1,11 @@
 var tela;
-var tamanhoGrade;
 var tamanhoJogador = 1;
 var pontosJogador = 0;
 var posicaoJogador = {};
 
 // Posição inicial
-posicaoJogador.x = 15;
-posicaoJogador.y = 15;
+posicaoJogador.x = Math.floor(tamanhoGrade/2);
+posicaoJogador.y = Math.floor(tamanhoGrade/2);
 
 var bordasTemColisao = true;
 var comandoDado = false;
@@ -16,7 +15,6 @@ var idIntervaloMovimento;
 var historicoMovimentos = [];
 
 function controlarJogador(tecla) {
-    tamanhoGrade = document.querySelectorAll('#tela-jogo tbody tr').length;
     let teclasPermitidas = ['w', 'a','s' ,'d' , 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
     console.log('Tecla: '+tecla);
     let permitir = false;
@@ -280,4 +278,8 @@ function getGrade(x, y) {
 
 function getPontos() {
     return pontosJogador;
+}
+
+function setTamanhoGrade() {
+
 }

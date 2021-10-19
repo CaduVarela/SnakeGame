@@ -4,19 +4,9 @@
         <meta charset="UTF-8">
         <title>Snake Game</title>
         <link rel="stylesheet" href="./css/style.css">
-        <script type="text/javascript" src="./js/tela.js"></script>
+        <script type="text/javascript" src="./js/tela-jogo.js"></script>
         <script type="text/javascript" src="./js/jogador.js"></script>
         <script type="text/javascript" src="./js/jogo.js"></script>
-        <script>
-            function iniciarJogo() {
-                document.addEventListener('keydown', function(event) {
-                    controlarJogador(event.key)
-                });
-                iniciarGrade();
-                adicionarObjetivo();
-                posicionarJogador();
-            }
-        </script>
     </head>
     <body>
         <header id="cabecalho">
@@ -25,16 +15,31 @@
         <div id="linha-info">
             <p id="pontos"><span class="negrito">Pontos</span>: 0</p>
         </div>
-        <div class="centralizar-conteudo">
-            <div id="corpo">
+        <div id="corpo">
+            <div class="centralizar-conteudo"></div>
                 <!--<h1><button onclick="adicionarObjetivo()">Adicionar Objetivo</button></h1>-->
                 <p><span class="italico">Utilize w, a, s, d ou as setas do teclado para jogar e controlar</span></p>
                 <div id="tela-jogo">
                     <script>iniciarJogo()</script>
                 </div>
+                </div>
+            </div>
+            <div id="menu-config">
+                <h1>Configurações</h1>
+                <form action="">
+                    <div class="grupo-form">
+                        <label for="idBordasInput">Bordas Tem Colisão</label>
+                        <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig()"> <br>
+                    </div>
+                    <div class="grupo-form">
+                        <label for="">Tamanho da Grade de jogo</label> <br>
+                        <input type="range"  id="idTamanhoGradeInputRange" name="tamanhoGradeInputRange" min="2" max="170" value="31" oninput="atualizarConfig()"> 
+                        <input type="number" id="idTamanhoGradeInputNumber" name="tamanhoGradeInputNumber" min="2" max="170" maxlength="3" value="31" onchange="atualizarConfig()">
+                    </div>
+                </form>
             </div>
         </div>
-        <div id="versao">Versão 1.1</div>
+        <div id="versao">Versão 1.2</div>
         <!--<footer>@CaduVarela</footer>-->
     </body>
 </html>

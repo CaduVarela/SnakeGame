@@ -13,16 +13,43 @@ function adicionarObjetivo() {
     } while (verificarOcupacaoElemento(idElemento));
 
     elemento.classList.add('objetivo');
-}
 
-function verificarOcupacaoElemento(idElemento) {
-    let elemento = document.getElementById(idElemento);
-    if (elemento.classList.contains('objetivo') || elemento.classList.contains('snake') || elemento.classList.contains('snake-head')) {
-        return true;
+    function verificarOcupacaoElemento(idElemento) {
+        let elemento = document.getElementById(idElemento);
+        if (elemento.classList.contains('objetivo') || elemento.classList.contains('snake') || elemento.classList.contains('snake-head')) {
+            return true;
+        }
+        return false;
     }
-    return false;
 }
 
 function atualizarPontuacao() {
     document.getElementById('pontos').innerHTML = '<span class="negrito">Pontos</span>: '+getPontos();;
+}
+
+function atualizarConfig() {
+    let colisaoBordasInputCheckbox = document.getElementById('idColisaoBordasInputCheckbox');
+    let tamanhoGradeInputRange = document.getElementById('idTamanhoGradeInputRange');
+    let tamanhoGradeInputNumber = document.getElementById('idTamanhoGradeInputNumber');
+
+    tamanhoGradeInputNumber.value = tamanhoGradeInputRange.value;
+    tamanhoGradeInputRange.value = tamanhoGradeInputNumber.value;
+
+    bordasTemColisao = colisaoBordasInputCheckbox.checked;
+    tamanhoGrade = tamanhoGradeInputNumber.value;
+
+    console.log(colisaoBordasInputCheckbox.checked+" :: "+bordasTemColisao);
+    console.log(tamanhoGradeInputRange.value);
+    console.log(tamanhoGradeInputNumber.value+" :: "+tamanhoGrade);
+    iniciarJogo();
+}
+
+function iniciarJogo() {
+    document.querySelector('#tela-jogo').innerHTML = "";
+    document.addEventListener('keydown', function(event) {
+        controlarJogador(event.key);
+    });
+    iniciarGrade();
+    adicionarObjetivo();
+    posicionarJogador();
 }

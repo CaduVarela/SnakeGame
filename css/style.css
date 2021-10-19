@@ -5,7 +5,7 @@
 }
 
 html {
-    font-family: 'Verdana';
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 body {
@@ -19,7 +19,6 @@ header#cabecalho {
     background-image: url('../img/padrao_ondulado.jpg');
     background-repeat: repeat;
     background-position-x: 0;
-    filter: hue-rotate(250deg);
     background-color: rgb(197, 219, 246);
     box-shadow: 0 1px 20px rgba(0, 0, 0,.4);
     text-align: center;
@@ -30,13 +29,19 @@ header#cabecalho {
     padding: 10px 0;
 }
 
+header#cabecalho, #menu-config {
+    filter: hue-rotate(250deg);
+    background-color: rgba(187, 219, 255, 0.2);
+}
+
 header h1 {
-    color: rgb(191, 187, 255);
+    color: rgb(187, 219, 255);
     background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(51, 51, 51);
+    border: 1px solid ;
     display: inline-block;
-    padding: 10px;
-    border-radius: 25px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 26px;
 }
 
 #corpo {
@@ -115,6 +120,7 @@ footer {
     border: 2px ridge rgb(0, 0, 0);
     /*margin: 10% auto 0;*/
     margin-bottom: 15px;
+    min-width: var(--tamanho-tela-jogo);
 }
 
 #grade {
@@ -129,8 +135,53 @@ footer {
 
 #grade tbody tr td {
     border: 1px solid rgba(55, 55, 55, 0.1);
+}
+
+/* Menu Config */
+
+#menu-config {
+    display: inline-block;
+    position: absolute;
+    
+    right: 10px;
+    top: 120px;
+
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, .1);
+    border-radius: 8px;
+    padding: 10px;
+
+}
+
+#menu-config h1 {
+    text-align: center;
+    font-size: 16pt;
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
     margin: 0;
-    padding: 0;
+}
+
+#menu-config form {
+    padding-top: 10px;
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    border-right: 1px solid rgba(0, 0, 0, .1);
+}
+
+#menu-config .grupo-form {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    margin-bottom: 5px;
+    text-indent: 5px;
+}
+
+#menu-config input[type="number"] {
+    margin: -15px 0 10px;
+    height: 10px;
+}
+
+#menu-config #idTamanhoGradeInputNumber {
+    width: 20%;
+}
+
+#menu-config #idTamanhoGradeInputRange {
+    width: 70%;
 }
 
 /* Misc */
@@ -138,7 +189,6 @@ footer {
 .centralizar-conteudo {
     display: flex;
     justify-content: center;
-    width: 100%;
 }
 
 .negrito {

@@ -1,7 +1,8 @@
+var tamanhoGrade = 31; // min - 2; max - 170; default - 31;
+
 function iniciarGrade() {
     //document.getElementById('tela-jogo').style = 'background-color: red;';
     let tela = document.getElementById('tela-jogo');
-    let tamanhoGrade = 31;
 
     HTMLgrade = '<table id="grade">';
     for (y=0; y<tamanhoGrade; y++) {
