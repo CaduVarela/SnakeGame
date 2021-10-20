@@ -2,7 +2,7 @@
 
 :root {
     --tamanho-tela-jogo: 70vh;
-    --hue-deg-filter: 260deg;
+    --hue-deg-filter: 270deg;
     --cor-tema: 197, 219, 246;
     --cor-tema-claro: 190, 231, 250;
     --cor-tema-escuro: 134, 149, 171;
@@ -117,7 +117,7 @@ footer {
 #tela-jogo {
     width: var(--tamanho-tela-jogo);
     height: var(--tamanho-tela-jogo);
-    border: 2px ridge rgb(0, 0, 0);
+    border: 2px outset rgb(0, 0, 0);
     /*margin: 10% auto 0;*/
     margin-bottom: 15px;
     padding: 0;
@@ -136,6 +136,8 @@ footer {
 
 #grade tbody tr td {
     border: 1px solid rgba(55, 55, 55, 0.1);
+    min-width: 1%;
+    min-height: 1%;
 }
 
 /* Menu Config */
@@ -194,10 +196,14 @@ footer {
     display: block;
     text-align: center;
 
-    width: 100%;
-    height: 100%;
+    width: 60%;
+    height: 60%;
 
-    background-color: rgba(var(--cor-tema-claro), .2);
+    margin: 20% auto;
+
+    border: 5px outset rgb(var(--cor-tema-claro));
+    border-radius: 50%;
+    background-color: rgba(var(--cor-tema-claro), .1);
     filter: hue-rotate(var(--hue-deg-filter));
 }
 
@@ -212,7 +218,8 @@ footer {
 
     font-size: 16pt;
     color: rgb(70, 70, 70);
-    background-color: rgba(var(--cor-tema-escuro), .3);
+    border-color: rgb(var(--cor-tema-claro));
+    background-color: rgba(255, 255, 255);
 }
 
 /* Misc */

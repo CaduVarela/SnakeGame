@@ -32,9 +32,14 @@
                         <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig('colisaoBordasInputCheckbox')"> <br>
                     </div>
                     <div class="grupo-form">
-                        <label for="">Tamanho da Grade de jogo</label> <br>
-                        <input type="range"  id="idTamanhoGradeInputRange" name="tamanhoGradeInputRange" min="2" max="170" value="31" onchange="atualizarConfig('tamanhoGradeInputRange')"> 
-                        <input type="number" id="idTamanhoGradeInputNumber" name="tamanhoGradeInputNumber" min="2" max="170" maxlength="3" value="31" onchange="atualizarConfig('tamanhoGradeInputNumber')">
+                        <label for="idTamanhoGradeInputNumber">Tamanho da Grade de jogo</label> <br>
+                        <input type="range"  id="idTamanhoGradeInputRange" name="tamanhoGradeInputRange" min="8" max="100" value="31" onchange="atualizarConfig('tamanhoGradeInputRange')"> 
+                        <input type="number" id="idTamanhoGradeInputNumber" name="tamanhoGradeInputNumber" min="8" max="100" maxlength="3" value="31" onchange="atualizarConfig('tamanhoGradeInputNumber')">
+                    </div>
+                    <div class="grupo-form">
+                        <label for="idVelocidadeNumber">Velocidade Jogador</label> <br>
+                        <input type="range"  id="idVelocidadeInputRange" name="velocidadeInputRange" min="0" max="200" value="50" onchange="atualizarConfig('velocidadeInputRange')"> 
+                        <input type="number" id="idVelocidadeInputNumber" name="velocidadeInputNumber" min="0" max="200" maxlength="3" value="50" onchange="atualizarConfig('velocidadeInputNumber')">
                     </div>
                 </form>
             </div>

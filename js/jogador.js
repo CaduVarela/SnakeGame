@@ -9,6 +9,7 @@ posicaoJogador.y = Math.floor(tamanhoGrade/2);
 
 var bordasTemColisao = true;
 var comandoDado = false;
+let mudarVelocidade = false;
 var movimento;
 var intervaloMovimento = 100; // em milissegundos // padrão: 100
 var idIntervaloMovimento;
@@ -30,8 +31,12 @@ function controlarJogador(tecla) {
     //console.log(tecla)
 
     // Inicia movimento automatico de COBRA
-    if (historicoMovimentos.length == 0) {
+    if (historicoMovimentos.length == 0 || mudarVelocidade) {
+        if (mudarVelocidade) {
+            clearInterval(idIntervaloMovimento)
+        }
         idIntervaloMovimento = setInterval(manterMovimentoJogador, intervaloMovimento);
+        mudarVelocidade = false;
     }
 
     getGradeAtual().classList.remove('snake-head');
