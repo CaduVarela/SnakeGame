@@ -16,25 +16,25 @@
             <p id="pontos"><span class="negrito">Pontos</span>: 0</p>
         </div>
         <div id="corpo">
-            <div class="centralizar-conteudo"></div>
-                <!--<h1><button onclick="adicionarObjetivo()">Adicionar Objetivo</button></h1>-->
-                <p><span class="italico">Utilize w, a, s, d ou as setas do teclado para jogar e controlar</span></p>
-                <div id="tela-jogo">
-                    <script>iniciarJogo()</script>
-                </div>
+            <!--<h1><button onclick="adicionarObjetivo()">Adicionar Objetivo</button></h1>-->
+            <p><span class="italico">Utilize w, a, s, d ou as setas do teclado para jogar e controlar</span></p>
+            <div id="tela-jogo">
+                <div id="tela-iniciar-jogo">
+                    <h1>Iniciar Jogo</h1>
+                    <button onclick="iniciarJogo()">Iniciar</button>
                 </div>
             </div>
             <div id="menu-config">
                 <h1>Configurações</h1>
-                <form action="">
+                <form>
                     <div class="grupo-form">
                         <label for="idBordasInput">Bordas Tem Colisão</label>
-                        <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig()"> <br>
+                        <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig('colisaoBordasInputCheckbox')"> <br>
                     </div>
                     <div class="grupo-form">
                         <label for="">Tamanho da Grade de jogo</label> <br>
-                        <input type="range"  id="idTamanhoGradeInputRange" name="tamanhoGradeInputRange" min="2" max="110" value="31" onchange="atualizarConfig()"> 
-                        <input type="number" id="idTamanhoGradeInputNumber" name="tamanhoGradeInputNumber" min="2" max="110" maxlength="3" value="31" onchange="atualizarConfig()">
+                        <input type="range"  id="idTamanhoGradeInputRange" name="tamanhoGradeInputRange" min="2" max="170" value="31" onchange="atualizarConfig('tamanhoGradeInputRange')"> 
+                        <input type="number" id="idTamanhoGradeInputNumber" name="tamanhoGradeInputNumber" min="2" max="170" maxlength="3" value="31" onchange="atualizarConfig('tamanhoGradeInputNumber')">
                     </div>
                 </form>
             </div>

@@ -27,13 +27,16 @@ function atualizarPontuacao() {
     document.getElementById('pontos').innerHTML = '<span class="negrito">Pontos</span>: '+getPontos();;
 }
 
-function atualizarConfig() {
+function atualizarConfig(acionador) {
     let colisaoBordasInputCheckbox = document.getElementById('idColisaoBordasInputCheckbox');
     let tamanhoGradeInputRange = document.getElementById('idTamanhoGradeInputRange');
     let tamanhoGradeInputNumber = document.getElementById('idTamanhoGradeInputNumber');
 
-    tamanhoGradeInputNumber.value = tamanhoGradeInputRange.value;
-    tamanhoGradeInputRange.value = tamanhoGradeInputNumber.value;
+    if (acionador == 'tamanhoGradeInputRange') {
+        tamanhoGradeInputNumber.value = tamanhoGradeInputRange.value;
+    } else if (acionador == 'tamanhoGradeInputNumber') {
+        tamanhoGradeInputRange.value = tamanhoGradeInputNumber.value;
+    }
 
     bordasTemColisao = colisaoBordasInputCheckbox.checked;
     tamanhoGrade = tamanhoGradeInputNumber.value;
@@ -45,7 +48,10 @@ function atualizarConfig() {
     console.log(colisaoBordasInputCheckbox.checked+" :: "+bordasTemColisao);
     console.log(tamanhoGradeInputRange.value);
     console.log(tamanhoGradeInputNumber.value+" :: "+tamanhoGrade);
-    iniciarJogo();
+
+    if (!document.querySelector('#tela-iniciar-jogo')) {
+        iniciarJogo();
+    }
 }
 
 function iniciarJogo() {
@@ -54,8 +60,6 @@ function iniciarJogo() {
         controlarJogador(event.key);
     });
     iniciarGrade();
-    if (document.querySelectorAll('.objetivo').length == 0) {
-        adicionarObjetivo();
-    }
+    adicionarObjetivo();
     posicionarJogador();
 }
