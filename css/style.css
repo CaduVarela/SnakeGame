@@ -2,6 +2,7 @@
 
 :root {
     --tamanho-tela-jogo: 70vh;
+    --hue-deg-filter: 250deg;
 }
 
 html {
@@ -20,6 +21,7 @@ header#cabecalho {
     background-repeat: repeat;
     background-position-x: 0;
     background-color: rgb(197, 219, 246);
+    filter: hue-rotate(var(--hue-deg-filter));
     box-shadow: 0 1px 20px rgba(0, 0, 0,.4);
     text-align: center;
 
@@ -27,11 +29,6 @@ header#cabecalho {
     height: 60px;
 
     padding: 10px 0;
-}
-
-header#cabecalho, #menu-config {
-    filter: hue-rotate(250deg);
-    background-color: rgba(187, 219, 255, 0.2);
 }
 
 header h1 {
@@ -120,7 +117,7 @@ footer {
     border: 2px ridge rgb(0, 0, 0);
     /*margin: 10% auto 0;*/
     margin-bottom: 15px;
-    min-width: var(--tamanho-tela-jogo);
+    max-width: var(--tamanho-tela-jogo);
 }
 
 #grade {
@@ -144,9 +141,12 @@ footer {
     position: absolute;
     
     right: 10px;
-    top: 120px;
+    top: 100px;
 
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, .1);
+    background-color: rgba(187, 219, 255, 0.5);
+    filter: hue-rotate(var(--hue-deg-filter)) grayscale(.6);
+
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
     border-radius: 8px;
     padding: 10px;
 

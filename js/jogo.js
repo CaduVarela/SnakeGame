@@ -37,6 +37,10 @@ function atualizarConfig() {
 
     bordasTemColisao = colisaoBordasInputCheckbox.checked;
     tamanhoGrade = tamanhoGradeInputNumber.value;
+    if (posicaoJogador.x > tamanhoGrade || posicaoJogador.y > tamanhoGrade) {
+        posicaoJogador.x = Math.floor(tamanhoGrade/2);
+        posicaoJogador.y = Math.floor(tamanhoGrade/2);
+    }
 
     console.log(colisaoBordasInputCheckbox.checked+" :: "+bordasTemColisao);
     console.log(tamanhoGradeInputRange.value);
@@ -50,6 +54,8 @@ function iniciarJogo() {
         controlarJogador(event.key);
     });
     iniciarGrade();
-    adicionarObjetivo();
+    if (document.querySelectorAll('.objetivo').length == 0) {
+        adicionarObjetivo();
+    }
     posicionarJogador();
 }
