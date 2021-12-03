@@ -11,7 +11,8 @@ var bordasTemColisao = true;
 var comandoDado = false;
 let mudarVelocidade = false;
 var movimento;
-var intervaloMovimento = 100; // em milissegundos // padrão: 100
+var intervaloMovimento = 100; // em milissegundos // padrão: 100 <---> velocidade padrão: 50
+var minIntervaloMovimento = 20; // define uma "velocidade maxima"
 var idIntervaloMovimento;
 var historicoMovimentos = [];
 
@@ -106,7 +107,7 @@ function controlarJogador(tecla) {
 }
 
 function manterMovimentoJogador() {
-    console.log('moveu');
+    //console.log('moveu');
 
     getGradeAtual().classList.remove('snake-head');
     if (historicoMovimentos.length == 0) {
@@ -261,6 +262,7 @@ function crescerJogador() {
 }
 
 function atualizarHistorico(ultimoMovimento) {
+    // !!! REVER CÓDIGO !!!
     if (ultimoMovimento != historicoMovimentos[historicoMovimentos.length-1] || historicoMovimentos.length == 0) {
         historicoMovimentos.push(ultimoMovimento);
     } else if (ultimoMovimento == historicoMovimentos[historicoMovimentos.length-1]) {
@@ -270,7 +272,9 @@ function atualizarHistorico(ultimoMovimento) {
     historicoMovimentos.reverse();
     historicoMovimentos.slice(tamanhoJogador, historicoMovimentos.length-tamanhoJogador)
     historicoMovimentos.reverse();
-    console.log(historicoMovimentos);
+
+    // Histórico de Movimentos log !!!
+    //console.log(historicoMovimentos);
 }
 
 function getGradeAtual() {
@@ -283,8 +287,4 @@ function getGrade(x, y) {
 
 function getPontos() {
     return pontosJogador;
-}
-
-function setTamanhoGrade() {
-
 }

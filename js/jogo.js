@@ -35,7 +35,7 @@ function atualizarConfig(acionador) {
     let velocidadeInputRange = document.getElementById('idVelocidadeInputRange');
     let velocidadeInputNumber = document.getElementById('idVelocidadeInputNumber');
 
-    // Sincronizando Inputs (Range e Number)
+    // Sincronizando Inputs de Configuração (Range e Number)
     if (acionador == 'tamanhoGradeInputRange') {
         tamanhoGradeInputNumber.value = tamanhoGradeInputRange.value;
     } else if (acionador == 'tamanhoGradeInputNumber') {
@@ -48,10 +48,19 @@ function atualizarConfig(acionador) {
         velocidadeInputRange.value = velocidadeInputNumber.value;
     }
 
-    // Redefinindo valores
+    // Ajustando Valores
     bordasTemColisao = colisaoBordasInputCheckbox.checked;
     tamanhoGrade = tamanhoGradeInputNumber.value;
-    intervaloMovimento = velocidadeInputNumber.getAttribute('max') - velocidadeInputNumber * 2;
+    intervaloMovimento = velocidadeInputNumber.getAttribute('max')*minIntervaloMovimento/velocidadeInputNumber.value
+    /* Calculo inversamente proporcional entre Velocidade e Intervalo de tempo entre movimentos (ms)
+    velocidadeInputNumber      |      intervaloMovimento
+            a=  max (200) ----------  c= 20
+            b=         40 ----------  x= x
+
+    x = a*c/b
+    intervaloMovimento = velocidadeInputNumber.getAttribute('max')*minIntervaloMovimento/velocidadeInputNumber.value
+    */
+
     mudarVelocidade = true;
     if (posicaoJogador.x > tamanhoGrade || posicaoJogador.y > tamanhoGrade) {
         posicaoJogador.x = Math.floor(tamanhoGrade/2);
