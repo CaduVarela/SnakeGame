@@ -270,11 +270,11 @@ function atualizarHistorico(ultimoMovimento) {
         historicoMovimentos.push(ultimoMovimento);
     }
     historicoMovimentos.reverse();
-    historicoMovimentos.slice(tamanhoJogador, historicoMovimentos.length-tamanhoJogador)
+    historicoMovimentos = historicoMovimentos.slice(0, tamanhoJogador);
     historicoMovimentos.reverse();
 
     // Histórico de Movimentos log !!!
-    //console.log(historicoMovimentos);
+    console.log(historicoMovimentos);
 }
 
 function getGradeAtual() {
