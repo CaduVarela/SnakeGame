@@ -83,21 +83,21 @@ function controlarJogador(tecla) {
             case 'ArrowLeft':
                 if (movimento == 'direita') {
                 break;
-            }
+                }
                 movimento = 'esquerda';
                 break;
             case 's':
             case 'ArrowDown':
                 if (movimento == 'cima') {
                 break;
-            }
+                }
                 movimento = 'baixo';
                 break;
             case 'd':
             case 'ArrowRight':
                 if (movimento == 'esquerda') {
                 break;
-            }
+                }
                 movimento = 'direita';
                 break;
         }
@@ -262,7 +262,6 @@ function crescerJogador() {
 }
 
 function atualizarHistorico(ultimoMovimento) {
-    // !!! REVER CÓDIGO !!!
     if (ultimoMovimento != historicoMovimentos[historicoMovimentos.length-1] || historicoMovimentos.length == 0) {
         historicoMovimentos.push(ultimoMovimento);
     } else if (ultimoMovimento == historicoMovimentos[historicoMovimentos.length-1]) {
