@@ -2,10 +2,14 @@
 
 :root {
     --tamanho-tela-jogo: 70vh;
+    --hue-deg-filter: 250deg;
+    --cor-tema: 197, 219, 246;
+    --cor-tema-claro: 190, 231, 250;
+    --cor-tema-escuro: 134, 149, 171;
 }
 
 html {
-    font-family: 'Verdana';
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 body {
@@ -19,8 +23,8 @@ header#cabecalho {
     background-image: url('../img/padrao_ondulado.jpg');
     background-repeat: repeat;
     background-position-x: 0;
-    filter: hue-rotate(250deg);
     background-color: rgb(197, 219, 246);
+    filter: hue-rotate(var(--hue-deg-filter));
     box-shadow: 0 1px 20px rgba(0, 0, 0,.4);
     text-align: center;
 
@@ -31,12 +35,13 @@ header#cabecalho {
 }
 
 header h1 {
-    color: rgb(191, 187, 255);
+    color: rgb(var(--cor-tema-escuro));
     background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(51, 51, 51);
+    border: 1px solid ;
     display: inline-block;
-    padding: 10px;
-    border-radius: 25px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 26px;
 }
 
 #corpo {
@@ -112,25 +117,59 @@ footer {
 #tela-jogo {
     width: var(--tamanho-tela-jogo);
     height: var(--tamanho-tela-jogo);
-    border: 2px ridge rgb(0, 0, 0);
+    border: 2px outset rgb(0, 0, 0);
     /*margin: 10% auto 0;*/
     margin-bottom: 15px;
+    padding: 0;
+    max-width: var(--tamanho-tela-jogo);
 }
 
 #grade {
     width: 100%;
     height: 100%;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: var(--tamanho-tela-jogo);
+    max-height: var(--tamanho-tela-jogo);
     border-spacing: 0;
     margin: 0;
     padding: 0;
 }
 
 #grade tbody tr td {
-    border: 1px solid rgba(55, 55, 55, 0.1);
-    margin: 0;
-    padding: 0;
+    border: 1px solid rgba(55, 55, 55, .115);
+    min-width: 1%;
+    min-height: 1%;
+}
+
+/* Iniciar e Reiniciar Jogo */
+
+#tela-iniciar-jogo {
+    display: block;
+    text-align: center;
+
+    width: 60%;
+    height: 60%;
+
+    margin: 20% auto;
+
+    border: 5px outset rgb(var(--cor-tema-claro));
+    border-radius: 50%;
+    background-color: rgba(var(--cor-tema-claro), .1);
+    filter: hue-rotate(var(--hue-deg-filter));
+}
+
+#tela-iniciar-jogo h1 {
+    margin: 0 0 15px;
+    padding-top: 30%;
+}
+
+#tela-iniciar-jogo button {
+    width: 125px;
+    height: 50px;
+
+    font-size: 16pt;
+    color: rgb(70, 70, 70);
+    border-color: rgb(var(--cor-tema-claro));
+    background-color: rgba(255, 255, 255);
 }
 
 /* Misc */
@@ -138,7 +177,6 @@ footer {
 .centralizar-conteudo {
     display: flex;
     justify-content: center;
-    width: 100%;
 }
 
 .negrito {
