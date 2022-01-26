@@ -11,7 +11,7 @@ posicaoJogador.y = 15;
 var bordasTemColisao = true;
 var comandoDado = false;
 var movimento;
-var intervaloMovimento = 100; // em milissegundos // padrão: 100
+var intervaloMovimento = 150; // em milissegundos // padrão: 100
 var idIntervaloMovimento;
 var historicoMovimentos = [];
 
