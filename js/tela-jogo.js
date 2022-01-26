@@ -1,4 +1,4 @@
-var tamanhoGrade = 31; // min - 2; max - 170; default - 31;
+var tamanhoGrade = 31; // min - 8; max - 100; default - 31; 
 
 function iniciarGrade() {
     //document.getElementById('tela-jogo').style = 'background-color: red;';

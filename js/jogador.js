@@ -11,7 +11,7 @@ var bordasTemColisao = true;
 var comandoDado = false;
 let mudarVelocidade = false;
 var movimento;
-var intervaloMovimento = 100; // em milissegundos // padrão: 100 <---> velocidade padrão: 50
+var intervaloMovimento = 133; // em milissegundos // padrão: 100 <---> velocidade padrão: 40 |||| 133 <---> 25
 var minIntervaloMovimento = 20; // define uma "velocidade maxima"
 var idIntervaloMovimento;
 var historicoMovimentos = [];
@@ -31,7 +31,7 @@ function controlarJogador(tecla) {
     //console.log(tamanhoGrade)
     //console.log(tecla)
 
-    // Inicia movimento automatico de COBRA
+    // Inicia movimento automatico de cobra
     if (historicoMovimentos.length == 0 || mudarVelocidade) {
         if (mudarVelocidade) {
             clearInterval(idIntervaloMovimento)
@@ -46,25 +46,25 @@ function controlarJogador(tecla) {
             switch (tecla) {
                 case 'w':
                 case 'ArrowUp':
-                    if (historicoMovimentos[historicoMovimentos.length-1] != 'baixo') {
+                    if (getUltimoMovimento() != 'baixo') {
                         atualizarHistorico('cima');
                     }
                     break;
                 case 'a':
                 case 'ArrowLeft':
-                    if (historicoMovimentos[historicoMovimentos.length-1] != 'direita') {
+                    if (getUltimoMovimento() != 'direita') {
                         atualizarHistorico('esquerda');
                     }
                     break;
                 case 's':
                 case 'ArrowDown':
-                    if (historicoMovimentos[historicoMovimentos.length-1] != 'cima') {
+                    if (getUltimoMovimento() != 'cima') {
                         atualizarHistorico('baixo');
                     }
                     break;
                 case 'd':
                 case 'ArrowRight':
-                    if (historicoMovimentos[historicoMovimentos.length-1] != 'esquerda') {
+                    if (getUltimoMovimento() != 'esquerda') {
                         atualizarHistorico('direita');
                     }
                     break;
@@ -111,10 +111,10 @@ function manterMovimentoJogador() {
 
     getGradeAtual().classList.remove('snake-head');
     if (historicoMovimentos.length == 0) {
-        return
+        return;
     }
 
-    switch (historicoMovimentos[historicoMovimentos.length-1]) {
+    switch (getUltimoMovimento()) {
         case 'cima':
             posicaoJogador.y--;
             break;
@@ -133,23 +133,23 @@ function manterMovimentoJogador() {
     
     if (verificarDerrota()) {
         console.log('perdeu');
-        switch (historicoMovimentos[historicoMovimentos.length-1]) {
+        switch (getUltimoMovimento()) {
             case 'cima':
                 posicaoJogador.y++;
                 getGradeAtual().style = 'border-top: 1px solid rgb(255, 100, 70);';
-                break
+                break;
             case 'esquerda':
                 posicaoJogador.x++;
                 getGradeAtual().style = 'border-left: 1px solid rgb(255, 100, 70);';
-                break
+                break;
             case 'baixo':
                 posicaoJogador.y--;
                 getGradeAtual().style = 'border-bottom: 1px solid rgb(255, 100, 70);';
-                break
+                break;
             case 'direita':
                 posicaoJogador.x--;
                 getGradeAtual().style = 'border-right: 1px solid rgb(255, 100, 70);';
-                break
+                break;
         }
         posicionarJogador();
         tela = document.getElementById('tela-jogo');
@@ -184,16 +184,131 @@ function posicionarCorpoJogador() {
     
     removerSnakeBody();
     for (i=0; i<tamanhoJogador-1; i++) {
-        if (i != 0) {
+        
+        /*
+        if (i == 0) {
+            switch (ultimoMovimento()) {
+                case: 
+                    break;
+            }
+            corpoX[i] = posicaoJogador.x;
+            corpoY[i] = posicaoJogador.y;
+            if (posicaoJogador.x == 0) {
+                corpoX[i] = tamanhoGrade-1;
+            } else if (posicaoJogador.x == tamanhoGrade-1) {
+
+            }
+        } else {
+            if (corpoX[i-1] == 0 && historicoMovimentos[i-1] == 'direita') {
+                corpoX[i] = tamanhoGrade-1;
+                corpoY[i] = corpoY[i-1];
+                console.log('11111111111111');
+            } else if (corpoX[i-1] == tamanhoGrade-1 && historicoMovimentos[i-1] == 'esquerda') {
+                corpoX[i] = -1;
+                corpoY[i] = corpoY[i-1];
+                console.log('22222222222222');
+            } else if (corpoY[i-1] == 0 && historicoMovimentos[i-1] == 'baixo') {
+                corpoX[i] = corpoX[i-1];
+                corpoY[i] = tamanhoGrade-1;
+                console.log('33333333333333');
+            } else if (corpoY[i-1] == tamanhoGrade-1 && historicoMovimentos[i-1] == 'cima') {
+                corpoX[i] = corpoX[i-1];
+                corpoY[i] = -1;
+                console.log('44444444444444');
+            } else {
+                corpoX[i] = corpoX[i-1];
+                corpoY[i] = corpoY[i-1];
+                console.log('55555555555555');
+            }
+        */
+    /*
+    if (i == 0) {
+            if (posicaoJogador.x == 0 && getUltimoMovimento() == 'direita') {
+                corpoX[i] = tamanhoGrade;
+                corpoY[i] = posicaoJogador.y;
+            } else if (posicaoJogador.x == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
+                corpoX[i] = -1;
+                corpoY[i] = posicaoJogador.y;
+            } else if (posicaoJogador.y == 0 && getUltimoMovimento() == 'baixo') {
+                corpoX[i] = posicaoJogador.x;
+                corpoY[i] = tamanhoGrade;
+            } else if (posicaoJogador.y == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
+                corpoX[i] = posicaoJogador.x;
+                corpoY[i] = -1;
+            } else {
+                corpoX[i] = posicaoJogador.x;
+                corpoY[i] = posicaoJogador.y;
+            }
+        } else {
+            if (corpoX[i-1] == 0 && getUltimoMovimento() == 'direita') {
+                corpoX[i] = tamanhoGrade;
+                corpoY[i] = corpoY[i-1];
+            } else if (corpoX[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
+                corpoX[i] = -1;
+                corpoY[i] = corpoY[i-1];
+            } else if (corpoY[i-1] == 0 && getUltimoMovimento() == 'baixo') {
+                corpoX[i] = corpoX[i-1];
+                corpoY[i] = tamanhoGrade;
+            } else if (corpoY[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
+                corpoX[i] = corpoX[i-1];
+                corpoY[i] = -1;
+            } else {
+                corpoX[i] = corpoX[i-1];
+                corpoY[i] = corpoY[i-1];
+            }
+        }
+    */
+
+        if (i == 0) {
+            corpoX[i] = posicaoJogador.x;
+            corpoY[i] = posicaoJogador.y;
+            if (posicaoJogador.x == 0 && getUltimoMovimento() == 'direita') {
+                corpoX[i] = tamanhoGrade;
+            } else if (posicaoJogador.x == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
+                corpoX[i] = -1;
+            } else if (posicaoJogador.y == 0 && getUltimoMovimento() == 'baixo') {
+                corpoY[i] = tamanhoGrade;
+            } else if (posicaoJogador.y == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
+                corpoY[i] = -1;
+            } else if (posicaoJogador.x == 0 || posicaoJogador.y == 0 || posicaoJogador.x == tamanhoGrade-1 || posicaoJogador.y == tamanhoGrade-1) {
+                corpoX[i] = posicaoJogador.x;
+                corpoY[i] = posicaoJogador.y;
+            }
+        } else {
             corpoX[i] = corpoX[i-1];
             corpoY[i] = corpoY[i-1];
-        } else {
+            if (corpoX[i-1] == 0 && getUltimoMovimento() == 'direita') {
+                corpoX[i] = tamanhoGrade;
+            } else if (corpoX[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
+                corpoX[i] = -1;
+            } else if (corpoY[i-1] == 0 && getUltimoMovimento() == 'baixo') {
+                corpoY[i] = tamanhoGrade;
+            } else if (corpoY[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
+                corpoY[i] = -1;
+            } else if (corpoX[i-1] == 0 || corpoX[i-1] == tamanhoGrade-1 || corpoY[i-1] == 0 || corpoY[i-1] == tamanhoGrade-1) {
+                corpoX[i] = corpoX[i-1];
+                corpoY[i] = corpoY[i-1];
+            }
+        }
+
+        console.log(`.`);
+        console.log(`corpoX[${i}]: ${corpoX[i]}`);
+        console.log(`corpoY[${i}]: ${corpoY[i]}`);
+
+        /* Codigo antigo - backup
+        if (i == 0) {
             corpoX[0] = posicaoJogador.x;
             corpoY[0] = posicaoJogador.y;
+        } else {
+            corpoX[i] = corpoX[i-1];
+            corpoY[i] = corpoY[i-1];
         }
+        */
+
         switch (historicoMovimentos[historicoMovimentos.length-(i+1)]) {
             case 'cima':
                 corpoY[i]++;
+                if (corpoX[i] < 0 || corpoX[i] > tamanhoGrade || corpoY[i] < 0 || corpoY[i] > tamanhoGrade) { break; }
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
             case 'esquerda':
@@ -223,20 +338,24 @@ function posicionarCorpoJogador() {
 function verificarDerrota() {
     if (bordasTemColisao) {
         if (posicaoJogador.x <= -1 || posicaoJogador.x >= tamanhoGrade || posicaoJogador.y <= -1 || posicaoJogador.y >= tamanhoGrade) {
-                    clearInterval(idIntervaloMovimento);
-                    return true;
-                }
+            clearInterval(idIntervaloMovimento);
+            return true;
+        }
     } else {
         if (posicaoJogador.x <= -1) {
             posicaoJogador.x = tamanhoGrade-1;
+            descreverPosicaoJogador();
         } else if (posicaoJogador.x >= tamanhoGrade) {
             posicaoJogador.x = 0;
+            descreverPosicaoJogador();
         } else if (posicaoJogador.y <= -1) {
             posicaoJogador.y = tamanhoGrade-1;
+            descreverPosicaoJogador();
         } else if (posicaoJogador.y >= tamanhoGrade) {
             posicaoJogador.y = 0;
+            descreverPosicaoJogador();
         }
-    }  
+    }
     
     if (getGradeAtual().classList.contains('snake-body')) {
         clearInterval(idIntervaloMovimento);
@@ -262,9 +381,9 @@ function crescerJogador() {
 }
 
 function atualizarHistorico(ultimoMovimento) {
-    if (ultimoMovimento != historicoMovimentos[historicoMovimentos.length-1] || historicoMovimentos.length == 0) {
+    if (ultimoMovimento != getUltimoMovimento() || historicoMovimentos.length == 0) {
         historicoMovimentos.push(ultimoMovimento);
-    } else if (ultimoMovimento == historicoMovimentos[historicoMovimentos.length-1]) {
+    } else if (ultimoMovimento == getUltimoMovimento()) {
         historicoMovimentos.shift();
         historicoMovimentos.push(ultimoMovimento);
     }
@@ -273,7 +392,17 @@ function atualizarHistorico(ultimoMovimento) {
     historicoMovimentos.reverse();
 
     // Histórico de Movimentos log !!!
-    console.log(historicoMovimentos);
+    // console.log(historicoMovimentos);
+}
+
+function descreverPosicaoJogador() {
+    console.log(`.`);
+    console.log(`posiçãoJogador.x: ${posicaoJogador.x}`);
+    console.log(`posiçãoJogador.y: ${posicaoJogador.y}`);
+}
+
+function getUltimoMovimento() {
+    return historicoMovimentos[historicoMovimentos.length-1];
 }
 
 function getGradeAtual() {
@@ -282,8 +411,4 @@ function getGradeAtual() {
 
 function getGrade(x, y) {
     return grade = document.getElementById(`gradeX${x}Y${y}`);
-}
-
-function getPontos() {
-    return pontosJogador;
 }

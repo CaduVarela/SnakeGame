@@ -19,17 +19,21 @@
             <!--<h1><button onclick="adicionarObjetivo()">Adicionar Objetivo</button></h1>-->
             <p><span class="italico">Utilize w, a, s, d ou as setas do teclado para jogar e controlar</span></p>
             <div id="tela-jogo">
+                <!--
                 <div id="tela-iniciar-jogo">
                     <h1>Iniciar Jogo</h1>
                     <button onclick="iniciarJogo()">Iniciar</button>
                 </div>
+                -->
+                <script>
+                    iniciarJogo();
+                </script>
             </div>
             <div id="menu-config">
-                
                 <h1>Configurações</h1>
                 <form>
                     <div class="grupo-form">
-                        <label for="idBordasInput">Bordas Tem Colisão</label>
+                        <label for="idColisaoBordasInputCheckbox">Bordas Tem Colisão (beta)</label>
                         <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig('colisaoBordasInputCheckbox')"> <br>
                     </div>
                     <div class="grupo-form">
@@ -38,9 +42,9 @@
                         <input type="number" id="idTamanhoGradeInputNumber" name="tamanhoGradeInputNumber" min="8" max="100" maxlength="3" value="31" onchange="atualizarConfig('tamanhoGradeInputNumber')">
                     </div>
                     <div class="grupo-form">
-                        <label for="idVelocidadeNumber">Velocidade Jogador</label> <br>
-                        <input type="range"  id="idVelocidadeInputRange" name="velocidadeInputRange" min="1" max="200" value="40" onchange="atualizarConfig('velocidadeInputRange')"> 
-                        <input type="number" id="idVelocidadeInputNumber" name="velocidadeInputNumber" min="1" max="200" maxlength="3" value="40" onchange="atualizarConfig('velocidadeInputNumber')">
+                        <label for="idVelocidadeInputNumber">Velocidade Jogador</label> <br>
+                        <input type="range"  id="idVelocidadeInputRange" name="velocidadeInputRange" min="1" max="200" value="25" onchange="atualizarConfig('velocidadeInputRange')"> 
+                        <input type="number" id="idVelocidadeInputNumber" name="velocidadeInputNumber" min="1" max="200" maxlength="3" value="25" onchange="atualizarConfig('velocidadeInputNumber')">
                     </div>
                 </form>
             </div>

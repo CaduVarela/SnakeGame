@@ -1,5 +1,4 @@
 function adicionarObjetivo() {
-    let tela = document.getElementById('tela-jogo');
     let tamanhoGrade = document.querySelectorAll('#tela-jogo tbody tr').length;
     let posicaoObjetivo = {x, y};
     let elemento, idElemento;
@@ -24,7 +23,7 @@ function adicionarObjetivo() {
 }
 
 function atualizarPontuacao() {
-    document.getElementById('pontos').innerHTML = '<span class="negrito">Pontos</span>: '+getPontos();;
+    document.getElementById('pontos').innerHTML = '<span class="negrito">Pontos</span>: '+pontosJogador;;
 }
 
 function atualizarConfig(acionador) {
@@ -48,14 +47,19 @@ function atualizarConfig(acionador) {
         velocidadeInputRange.value = velocidadeInputNumber.value;
     }
 
+    if (verificarDerrota()) {
+        return;
+    }
+
     // Ajustando Valores
     bordasTemColisao = colisaoBordasInputCheckbox.checked;
     tamanhoGrade = tamanhoGradeInputNumber.value;
-    intervaloMovimento = velocidadeInputNumber.getAttribute('max')*minIntervaloMovimento/velocidadeInputNumber.value
+    intervaloMovimento = velocidadeInputNumber.getAttribute('max')*minIntervaloMovimento/velocidadeInputNumber.value;
     /* Calculo inversamente proporcional entre Velocidade e Intervalo de tempo entre movimentos (ms)
+    
     velocidadeInputNumber      |      intervaloMovimento
             a=  max (200) ----------  c= 20
-            b=         40 ----------  x= x
+            b=  min (40)  ----------  x
 
     x = a*c/b
     intervaloMovimento = velocidadeInputNumber.getAttribute('max')*minIntervaloMovimento/velocidadeInputNumber.value
@@ -68,10 +72,9 @@ function atualizarConfig(acionador) {
     }
 
     // Debug
-    console.log(colisaoBordasInputCheckbox.checked+' :: '+bordasTemColisao);
-    console.log(tamanhoGradeInputRange.value);
-    console.log(tamanhoGradeInputNumber.value+' :: '+tamanhoGrade);
-    console.log(velocidadeInputNumber+' :: '+intervaloMovimento)
+    // console.log('colisão Bordas (input :: interpretado) --> '+colisaoBordasInputCheckbox.checked+' :: '+bordasTemColisao);
+    // console.log('tamanhograde (input number/range :: interpretado) --> '+tamanhoGradeInputNumber.value+' / '+tamanhoGradeInputRange.value+' :: '+tamanhoGrade);
+     console.log('velocidade (input :: intervaloMovimento) --> '+velocidadeInputNumber+' :: '+intervaloMovimento)
 
     // Não muda até iniciar o jogo / enquanto está na tela inicial
     if (!document.querySelector('#tela-iniciar-jogo')) {
