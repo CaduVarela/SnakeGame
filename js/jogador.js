@@ -258,6 +258,9 @@ function posicionarCorpoJogador() {
             }
         }
     */
+    /* FIX!!!!!!!!!!!!!!!!
+        getUltimoMovimento() é o que faz com que não funcione, é preciso encontrar uma maneira melhor...
+    */
 
         if (i == 0) {
             corpoX[i] = posicaoJogador.x;
@@ -277,14 +280,20 @@ function posicionarCorpoJogador() {
         } else {
             corpoX[i] = corpoX[i-1];
             corpoY[i] = corpoY[i-1];
+            console.log(historicoMovimentos+' :: '+getUltimoMovimento());
+
             if (corpoX[i-1] == 0 && getUltimoMovimento() == 'direita') {
                 corpoX[i] = tamanhoGrade;
+                console.log('trigger :: direita');
             } else if (corpoX[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
                 corpoX[i] = -1;
+                console.log('trigger :: esquerda');
             } else if (corpoY[i-1] == 0 && getUltimoMovimento() == 'baixo') {
                 corpoY[i] = tamanhoGrade;
+                console.log('trigger :: baixo');
             } else if (corpoY[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
                 corpoY[i] = -1;
+                console.log('trigger :: cima');
             } else if (corpoX[i-1] == 0 || corpoX[i-1] == tamanhoGrade-1 || corpoY[i-1] == 0 || corpoY[i-1] == tamanhoGrade-1) {
                 corpoX[i] = corpoX[i-1];
                 corpoY[i] = corpoY[i-1];
@@ -313,14 +322,17 @@ function posicionarCorpoJogador() {
                 break;
             case 'esquerda':
                 corpoX[i]++;
+                if (corpoX[i] < 0 || corpoX[i] > tamanhoGrade || corpoY[i] < 0 || corpoY[i] > tamanhoGrade) { break; }
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
             case 'baixo':
                 corpoY[i]--;
+                if (corpoX[i] < 0 || corpoX[i] > tamanhoGrade || corpoY[i] < 0 || corpoY[i] > tamanhoGrade) { break; }
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
             case 'direita':
                 corpoX[i]--;
+                if (corpoX[i] < 0 || corpoX[i] > tamanhoGrade || corpoY[i] < 0 || corpoY[i] > tamanhoGrade) { break; }
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
         }
