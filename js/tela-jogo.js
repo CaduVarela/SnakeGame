@@ -16,3 +16,18 @@ function iniciarGrade() {
 
     tela.insertAdjacentHTML("afterbegin", HTMLgrade);
 }
+
+function configDropdown() {
+    let menu = document.getElementById('menu-config');
+    let button = menu.getElementsByTagName('button')[0];
+    if (menu.classList.contains('aberto')) { // Se menu aberto --> fecha menu
+        menu.classList.remove('aberto');
+        menu.classList.add('fechado');
+        button.innerHTML = '<img src="./../img/config.png">';
+
+    } else if (menu.classList.contains('fechado')) { // Se menu fechado --> abre menu
+        menu.classList.remove('fechado');
+        menu.classList.add('aberto');
+        button.innerHTML = '<h1>Configurações</h1>';
+    }
+}

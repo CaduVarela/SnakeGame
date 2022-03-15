@@ -29,12 +29,12 @@
                     iniciarJogo();
                 </script>
             </div>
-            <div id="menu-config">
-                <h1>Configurações</h1>
-                <form>
+            <div id="menu-config" class="fechado">
+                <button onclick="configDropdown()"><img src="./img/config.png" alt="Config"></button>
+                <form id="form-config">
                     <div class="grupo-form">
                         <label for="idColisaoBordasInputCheckbox">Bordas Tem Colisão (beta)</label>
-                        <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig('colisaoBordasInputCheckbox')"> <br>
+                        <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig('colisaoBordasInputCheckbox')">
                     </div>
                     <div class="grupo-form">
                         <label for="idTamanhoGradeInputNumber">Tamanho da Grade de jogo</label> <br>
