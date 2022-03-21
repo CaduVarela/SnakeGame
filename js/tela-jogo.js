@@ -23,7 +23,7 @@ function configDropdown() {
     if (menu.classList.contains('aberto')) { // Se menu aberto --> fecha menu
         menu.classList.remove('aberto');
         menu.classList.add('fechado');
-        button.innerHTML = '<img src="./../img/config.png">';
+        button.innerHTML = '<img src="./img/config.png">';
 
     } else if (menu.classList.contains('fechado')) { // Se menu fechado --> abre menu
         menu.classList.remove('fechado');
