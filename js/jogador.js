@@ -260,43 +260,49 @@ function posicionarCorpoJogador() {
     */
     /* FIX!!!!!!!!!!!!!!!!
         getUltimoMovimento() é o que faz com que não funcione, é preciso encontrar uma maneira melhor...
+
+        MAIOR PROBLEMA: Não atualiza o histórico de movimentos com o bug
+        bug --> fazer uma curva logo após atravessar a borda sem colisão quebra o jogo (quando a jogador já está um pouco grande)
     */
 
         if (i == 0) {
             corpoX[i] = posicaoJogador.x;
             corpoY[i] = posicaoJogador.y;
-            if (posicaoJogador.x == 0 && getUltimoMovimento() == 'direita') {
-                corpoX[i] = tamanhoGrade;
-            } else if (posicaoJogador.x == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
-                corpoX[i] = -1;
-            } else if (posicaoJogador.y == 0 && getUltimoMovimento() == 'baixo') {
-                corpoY[i] = tamanhoGrade;
-            } else if (posicaoJogador.y == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
-                corpoY[i] = -1;
-            } else if (posicaoJogador.x == 0 || posicaoJogador.y == 0 || posicaoJogador.x == tamanhoGrade-1 || posicaoJogador.y == tamanhoGrade-1) {
-                corpoX[i] = posicaoJogador.x;
-                corpoY[i] = posicaoJogador.y;
+            if (!bordasTemColisao) {
+                if (posicaoJogador.x == 0 && getUltimoMovimento() == 'direita') {
+                    corpoX[i] = tamanhoGrade;
+                } else if (posicaoJogador.x == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
+                    corpoX[i] = -1;
+                } else if (posicaoJogador.y == 0 && getUltimoMovimento() == 'baixo') {
+                    corpoY[i] = tamanhoGrade;
+                } else if (posicaoJogador.y == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
+                    corpoY[i] = -1;
+                } else if (posicaoJogador.x == 0 || posicaoJogador.y == 0 || posicaoJogador.x == tamanhoGrade-1 || posicaoJogador.y == tamanhoGrade-1) {
+                    corpoX[i] = posicaoJogador.x;
+                    corpoY[i] = posicaoJogador.y;
+                }
             }
         } else {
             corpoX[i] = corpoX[i-1];
             corpoY[i] = corpoY[i-1];
             console.log(historicoMovimentos+' :: '+getUltimoMovimento());
-
-            if (corpoX[i-1] == 0 && getUltimoMovimento() == 'direita') {
-                corpoX[i] = tamanhoGrade;
-                console.log('trigger :: direita');
-            } else if (corpoX[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
-                corpoX[i] = -1;
-                console.log('trigger :: esquerda');
-            } else if (corpoY[i-1] == 0 && getUltimoMovimento() == 'baixo') {
-                corpoY[i] = tamanhoGrade;
-                console.log('trigger :: baixo');
-            } else if (corpoY[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
-                corpoY[i] = -1;
-                console.log('trigger :: cima');
-            } else if (corpoX[i-1] == 0 || corpoX[i-1] == tamanhoGrade-1 || corpoY[i-1] == 0 || corpoY[i-1] == tamanhoGrade-1) {
-                corpoX[i] = corpoX[i-1];
-                corpoY[i] = corpoY[i-1];
+            if (!bordasTemColisao) {
+                if (corpoX[i-1] == 0 && getUltimoMovimento() == 'direita') {
+                    corpoX[i] = tamanhoGrade;
+                    console.log('trigger :: direita');
+                } else if (corpoX[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
+                    corpoX[i] = -1;
+                    console.log('trigger :: esquerda');
+                } else if (corpoY[i-1] == 0 && getUltimoMovimento() == 'baixo') {
+                    corpoY[i] = tamanhoGrade;
+                    console.log('trigger :: baixo');
+                } else if (corpoY[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
+                    corpoY[i] = -1;
+                    console.log('trigger :: cima');
+                } else if (corpoX[i-1] == 0 || corpoX[i-1] == tamanhoGrade-1 || corpoY[i-1] == 0 || corpoY[i-1] == tamanhoGrade-1) {
+                    corpoX[i] = corpoX[i-1];
+                    corpoY[i] = corpoY[i-1];
+                }
             }
         }
 
@@ -317,22 +323,18 @@ function posicionarCorpoJogador() {
         switch (historicoMovimentos[historicoMovimentos.length-(i+1)]) {
             case 'cima':
                 corpoY[i]++;
-                if (corpoX[i] < 0 || corpoX[i] > tamanhoGrade || corpoY[i] < 0 || corpoY[i] > tamanhoGrade) { break; }
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
             case 'esquerda':
                 corpoX[i]++;
-                if (corpoX[i] < 0 || corpoX[i] > tamanhoGrade || corpoY[i] < 0 || corpoY[i] > tamanhoGrade) { break; }
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
             case 'baixo':
                 corpoY[i]--;
-                if (corpoX[i] < 0 || corpoX[i] > tamanhoGrade || corpoY[i] < 0 || corpoY[i] > tamanhoGrade) { break; }
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
             case 'direita':
                 corpoX[i]--;
-                if (corpoX[i] < 0 || corpoX[i] > tamanhoGrade || corpoY[i] < 0 || corpoY[i] > tamanhoGrade) { break; }
                 getGrade(corpoX[i], corpoY[i]).classList.add('snake-body');
                 break;
         }
@@ -404,7 +406,7 @@ function atualizarHistorico(ultimoMovimento) {
     historicoMovimentos.reverse();
 
     // Histórico de Movimentos log !!!
-    // console.log(historicoMovimentos);
+     console.log(historicoMovimentos);
 }
 
 function descreverPosicaoJogador() {
