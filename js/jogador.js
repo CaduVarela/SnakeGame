@@ -263,6 +263,8 @@ function posicionarCorpoJogador() {
 
         MAIOR PROBLEMA: Não atualiza o histórico de movimentos com o bug
         bug --> fazer uma curva logo após atravessar a borda sem colisão quebra o jogo (quando a jogador já está um pouco grande)
+
+        Tem que pegar o ultimo movimento do pedaço de corpo em si, não da cabeça...
     */
 
         if (i == 0) {
@@ -285,18 +287,18 @@ function posicionarCorpoJogador() {
         } else {
             corpoX[i] = corpoX[i-1];
             corpoY[i] = corpoY[i-1];
-            console.log(historicoMovimentos+' :: '+getUltimoMovimento());
+            console.log(historicoMovimentos+' :: '+historicoMovimentos[tamanhoJogador-1-i]);
             if (!bordasTemColisao) {
-                if (corpoX[i-1] == 0 && getUltimoMovimento() == 'direita') {
+                if (corpoX[i-1] == 0 && historicoMovimentos[tamanhoJogador-1-i] == 'direita') {
                     corpoX[i] = tamanhoGrade;
                     console.log('trigger :: direita');
-                } else if (corpoX[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'esquerda') {
+                } else if (corpoX[i-1] == tamanhoGrade-1 && historicoMovimentos[tamanhoJogador-1-i] == 'esquerda') {
                     corpoX[i] = -1;
                     console.log('trigger :: esquerda');
-                } else if (corpoY[i-1] == 0 && getUltimoMovimento() == 'baixo') {
+                } else if (corpoY[i-1] == 0 && historicoMovimentos[tamanhoJogador-1-i] == 'baixo') {
                     corpoY[i] = tamanhoGrade;
                     console.log('trigger :: baixo');
-                } else if (corpoY[i-1] == tamanhoGrade-1 && getUltimoMovimento() == 'cima') {
+                } else if (corpoY[i-1] == tamanhoGrade-1 && historicoMovimentos[tamanhoJogador-1-i] == 'cima') {
                     corpoY[i] = -1;
                     console.log('trigger :: cima');
                 } else if (corpoX[i-1] == 0 || corpoX[i-1] == tamanhoGrade-1 || corpoY[i-1] == 0 || corpoY[i-1] == tamanhoGrade-1) {
