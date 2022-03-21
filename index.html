@@ -4,19 +4,9 @@
         <meta charset="UTF-8">
         <title>Snake Game</title>
         <link rel="stylesheet" href="./css/style.css">
-        <script type="text/javascript" src="./js/tela.js"></script>
+        <script type="text/javascript" src="./js/tela-jogo.js"></script>
         <script type="text/javascript" src="./js/jogador.js"></script>
         <script type="text/javascript" src="./js/jogo.js"></script>
-        <script>
-            function iniciarJogo() {
-                document.addEventListener('keydown', function(event) {
-                    controlarJogador(event.key)
-                });
-                iniciarGrade();
-                adicionarObjetivo();
-                posicionarJogador();
-            }
-        </script>
     </head>
     <body>
         <header id="cabecalho">
@@ -25,16 +15,43 @@
         <div id="linha-info">
             <p id="pontos"><span class="negrito">Pontos</span>: 0</p>
         </div>
-        <div class="centralizar-conteudo">
-            <div id="corpo">
-                <!--<h1><button onclick="adicionarObjetivo()">Adicionar Objetivo</button></h1>-->
-                <p><span class="italico">Utilize w, a, s, d ou as setas do teclado para jogar e controlar</span></p>
-                <div id="tela-jogo">
-                    <script>iniciarJogo()</script>
+        <div id="corpo">
+            <!--<h1><button onclick="adicionarObjetivo()">Adicionar Objetivo</button></h1>-->
+            <p><span class="italico">Utilize w, a, s, d ou as setas do teclado para jogar e controlar</span></p>
+            <div id="tela-jogo">
+                <!--
+                <div id="tela-iniciar-jogo">
+                    <h1>Iniciar Jogo</h1>
+                    <button onclick="iniciarJogo()">Iniciar</button>
                 </div>
+                -->
+                <script>
+                    iniciarJogo();
+                </script>
+            </div>
+
+            <!--Menu de Cofigurações-->>
+            <div id="menu-config" class="fechado">
+                <button onclick="configDropdown()"><img src="./img/config.png" alt="Config"></button>
+                <form id="form-config">
+                    <div class="grupo-form">
+                        <label for="idColisaoBordasInputCheckbox">Bordas Tem Colisão</label>
+                        <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig('colisaoBordasInputCheckbox')">
+                    </div>
+                    <div class="grupo-form">
+                        <label for="idTamanhoGradeInputNumber">Tamanho da Grade de jogo</label> <br>
+                        <input type="range"  id="idTamanhoGradeInputRange" name="tamanhoGradeInputRange" min="8" max="100" value="31" onchange="atualizarConfig('tamanhoGradeInputRange')"> 
+                        <input type="number" id="idTamanhoGradeInputNumber" name="tamanhoGradeInputNumber" min="8" max="100" maxlength="3" value="31" onchange="atualizarConfig('tamanhoGradeInputNumber')">
+                    </div>
+                    <div class="grupo-form">
+                        <label for="idVelocidadeInputNumber">Velocidade Jogador</label> <br>
+                        <input type="range"  id="idVelocidadeInputRange" name="velocidadeInputRange" min="1" max="200" value="25" onchange="atualizarConfig('velocidadeInputRange')"> 
+                        <input type="number" id="idVelocidadeInputNumber" name="velocidadeInputNumber" min="1" max="200" maxlength="3" value="25" onchange="atualizarConfig('velocidadeInputNumber')">
+                    </div>
+                </form>
             </div>
         </div>
-        <div id="versao">Versão 1.1</div>
+        <div id="versao">Versão 1.2</div>
         <!--<footer>@CaduVarela</footer>-->
     </body>
 </html>
