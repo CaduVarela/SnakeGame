@@ -16,6 +16,10 @@ var minIntervaloMovimento = 20; // define uma "velocidade maxima"
 var idIntervaloMovimento;
 var historicoMovimentos = [];
 
+/* NOTAS
+- BUG: crescer jogador enquando atravessa parede causa perda de controle
+*/
+
 function controlarJogador(tecla) {
     let teclasPermitidas = ['w', 'a','s' ,'d' , 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
     console.log('Tecla: '+tecla);
