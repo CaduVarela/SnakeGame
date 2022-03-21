@@ -29,11 +29,13 @@
                     iniciarJogo();
                 </script>
             </div>
+
+            <!--Menu de Cofigurações-->>
             <div id="menu-config" class="fechado">
                 <button onclick="configDropdown()"><img src="./img/config.png" alt="Config"></button>
                 <form id="form-config">
                     <div class="grupo-form">
-                        <label for="idColisaoBordasInputCheckbox">Bordas Tem Colisão (beta)</label>
+                        <label for="idColisaoBordasInputCheckbox">Bordas Tem Colisão</label>
                         <input type="checkbox" id="idColisaoBordasInputCheckbox" name="colisaoBordasInputCheckbox" checked onchange="atualizarConfig('colisaoBordasInputCheckbox')">
                     </div>
                     <div class="grupo-form">
