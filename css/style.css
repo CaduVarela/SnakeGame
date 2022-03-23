@@ -246,6 +246,36 @@ footer {
     background-color: white;
 }
 
+/* Tela Reiniciar */
+
+#tela-reiniciar {
+    /*display: none;*/
+    position: absolute;
+    top: 30%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    padding: 0 10px 20px;
+    width: 200px;
+    height: 210px;
+    border-radius: 8px;
+    filter: hue-rotate(var(--hue-deg-filter));
+    backdrop-filter: blur(2px) hue-rotate(calc(var(--hue-deg-filter)*-1));
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, .2);
+}
+
+#tela-reiniciar button {
+    width: 100px;
+}
+
+.visivel {
+    display: block;
+}
+
+.invisivel {
+    display: none;
+}
+
 /* Iniciar e Reiniciar Jogo */
 
 #tela-iniciar-jogo {
@@ -268,7 +298,7 @@ footer {
     padding-top: 30%;
 }
 
-#tela-iniciar-jogo button {
+button {
     width: 125px;
     height: 50px;
 

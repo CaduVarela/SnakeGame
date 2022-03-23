@@ -5,7 +5,7 @@
         <title>Snake Game</title>
         <link rel="icon" href="./img/favicon.png">
         <link rel="stylesheet" href="./css/style.css">
-        <script type="text/javascript" src="./js/tela-jogo.js"></script>
+        <script type="text/javascript" src="./js/tela.js"></script>
         <script type="text/javascript" src="./js/jogador.js"></script>
         <script type="text/javascript" src="./js/jogo.js"></script>
     </head>
@@ -31,9 +31,16 @@
                 </script>
             </div>
 
+            <div id="tela-reiniciar" class="invisivel">
+                <h1>Pontuação</h1>
+                <h2 id="pontuacao">&rarr;</h2>
+                <p id="highscore"></p>
+                <button onclick="alternarTelaReiniciar(false)">Reiniciar</button>
+            </div>
+
             <!--Menu de Cofigurações-->
             <div id="menu-config" class="fechado">
-                <button onclick="configDropdown()"><img src="./img/config.png" alt="Config"></button>
+                <button onclick="alternarMenuConfig()"><img src="./img/config.png" alt="Config"></button>
                 <form id="form-config">
                     <div class="grupo-form">
                         <label for="idColisaoBordasInputCheckbox">Bordas Tem Colisão</label>

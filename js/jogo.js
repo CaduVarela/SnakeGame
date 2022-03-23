@@ -8,14 +8,14 @@ function adicionarObjetivo() {
         posicaoObjetivo.y = Math.floor(Math.random() * tamanhoGrade);
         idElemento=`gradeX${posicaoObjetivo.x}Y${posicaoObjetivo.y}`;
         elemento = document.getElementById(idElemento);
-        console.log(`Objetivo adicionado em (${posicaoObjetivo.x}, ${posicaoObjetivo.y})`);
-    } while (verificarOcupacaoElemento(idElemento));
+    } while (elementoOcupado(idElemento));
 
     elemento.classList.add('objetivo');
+    console.log(`Objetivo adicionado em (${posicaoObjetivo.x}, ${posicaoObjetivo.y})`);
 
-    function verificarOcupacaoElemento(idElemento) {
+    function elementoOcupado(idElemento) {
         let elemento = document.getElementById(idElemento);
-        if (elemento.classList.contains('objetivo') || elemento.classList.contains('snake') || elemento.classList.contains('snake-head')) {
+        if (elemento.classList.contains('snake') || elemento.classList.contains('snake-head')) {
             return true;
         }
         return false;
@@ -88,8 +88,8 @@ function iniciarJogo() {
         controlarJogador(event.key);
     });
     iniciarGrade();
+    posicionarJogador();
     if (document.querySelectorAll('.objetivo').length == 0) {
         adicionarObjetivo();
     }
-    posicionarJogador();
 }

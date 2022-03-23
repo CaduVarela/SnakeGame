@@ -158,6 +158,7 @@ function manterMovimentoJogador() {
         posicionarJogador();
         tela = document.getElementById('tela-jogo');
         tela.style='border: 2px ridge rgb(255, 100, 70);';
+        alternarTelaReiniciar();
         return;
     }
     posicionarJogador();

@@ -17,7 +17,7 @@ function iniciarGrade() {
     tela.insertAdjacentHTML("afterbegin", HTMLgrade);
 }
 
-function configDropdown() {
+function alternarMenuConfig() {
     let menu = document.getElementById('menu-config');
     let button = menu.getElementsByTagName('button')[0];
     if (menu.classList.contains('aberto')) { // Se menu aberto --> fecha menu
@@ -29,5 +29,29 @@ function configDropdown() {
         menu.classList.remove('fechado');
         menu.classList.add('aberto');
         button.innerHTML = '<h1>Configurações</h1>';
+    }
+}
+
+function alternarTelaReiniciar() {
+    let telaReiniciar = document.getElementById('tela-reiniciar');
+    let pPontuacao = document.getElementById('pontuacao');
+    let hHighscore = document.getElementById('highscore');
+    let localStorage = window.localStorage;
+    if ('highscore' in localStorage) {
+        if (pontosJogador > localStorage.getItem('highscore')) {
+            localStorage.setItem('highscore', pontosJogador);
+        }
+    } else {
+        localStorage.setItem('highscore', pontosJogador);
+    }
+    if (telaReiniciar.classList.contains('visivel')) { // Fecha a tela-reiniciar
+        telaReiniciar.classList.remove('visivel');
+        telaReiniciar.classList.add('invisivel');
+    } else if (telaReiniciar.classList.contains('invisivel')) { // Abre a tela-reiniciar
+        telaReiniciar.classList.remove('invisivel');
+        telaReiniciar.classList.add('visivel');
+        pPontuacao.innerHTML = '&rarr; '+pontosJogador;
+        hHighscore.innerHTML = 'Highscore: '+localStorage.getItem('highscore');
+        iniciarJogo();
     }
 }
