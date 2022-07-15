@@ -52,6 +52,9 @@ function alternarTelaReiniciar() {
         telaReiniciar.classList.add('visivel');
         pPontuacao.innerHTML = '&rarr; '+pontosJogador;
         hHighscore.innerHTML = 'Highscore: '+localStorage.getItem('highscore');
+
+        posicaoJogador.x = Math.floor(tamanhoGrade/2);
+        posicaoJogador.y = Math.floor(tamanhoGrade/2);
         iniciarJogo();
     }
 }
